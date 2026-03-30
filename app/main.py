@@ -38,21 +38,28 @@ def show_tasks(tasks):
         status = "✔" if task["done"] else "✘"
         print(f"{i}. [{status}] {task['title']} ({task['created_at']})")
 
-
+# 예외 처리 추가
 def complete_task(tasks):
     show_tasks(tasks)
-    idx = int(input("완료할 번호: "))
-    if 0 <= idx < len(tasks):
-        tasks[idx]["done"] = True
-        print("완료 처리됨")
-
+    try:
+        idx = int(input("완료할 번호: "))
+        if 0 <= idx < len(tasks):
+            tasks[idx]["done"] = True
+            print("완료 처리됨")
+        else:
+            print("존재하지 않는 번호입니다.")
+    except ValueError:
+        print("숫자만 입력해주세요.")
 
 def delete_task(tasks):
     show_tasks(tasks)
-    idx = int(input("삭제할 번호: "))
-    if 0 <= idx < len(tasks):
-        tasks.pop(idx)
-        print("삭제 완료")
+    try:
+        idx = int(input("삭제할 번호: "))
+        if 0 <= idx < len(tasks):
+            tasks.pop(idx)
+            print("삭제 완료")
+    except ValueError:
+        print("숫자만 입력해주세요.")
 
 
 def main():
